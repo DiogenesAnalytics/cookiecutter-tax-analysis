@@ -1,108 +1,165 @@
-# Cookiecutter Data Science
+# Cookiecutter Tax Analysis
 
-_A logical, reasonably standardized, but flexible project structure for doing and sharing data science work._
+_A reproducible and containerized project structure for performing, documenting, and reporting tax calculations with Jupyter notebooks._
 
+---
 
-#### [Project homepage](http://drivendata.github.io/cookiecutter-data-science/)
+## Overview
 
+This cookiecutter template provides a standardized yet flexible structure for small- to medium-scale tax analysis projects.  
+It builds on the [Cookiecutter Data Science](https://drivendata.github.io/cookiecutter-data-science/) layout but simplifies it for use in financial, accounting, or tax computation contexts.
 
-### Requirements to use the cookiecutter template:
------------
- - Python 2.7 or 3.5+
- - [Cookiecutter Python package](http://cookiecutter.readthedocs.org/en/latest/installation.html) >= 1.4.0: This can be installed with pip by or conda depending on how you manage your Python packages:
+The template supports:
+- Reproducible environments via Docker (using the `jupyter/scipy-notebook` base image)
+- Organized data directories (`raw`, `interim`, `processed`)
+- Integrated reporting workflows (LaTeX, PDF, HTML)
+- Optional Jupyter notebook automation via Makefile commands
 
-``` bash
-$ pip install cookiecutter
+---
+
+## Requirements
+
+To use this template, you’ll need:
+
+- Python 3.8+
+- [Cookiecutter](https://cookiecutter.readthedocs.io/en/latest/) >= 1.7.0
+- [Docker](https://www.docker.com/) (recommended for running Jupyter notebooks)
+
+You can install cookiecutter via pip or conda:
+
+```bash
+pip install cookiecutter
 ```
 
 or
 
-``` bash
-$ conda config --add channels conda-forge
-$ conda install cookiecutter
+```bash
+conda config --add channels conda-forge
+conda install cookiecutter
 ```
 
+---
 
-### To start a new project, run:
-------------
+## Usage
 
-    cookiecutter -c v1 https://github.com/drivendata/cookiecutter-data-science
+To generate a new tax analysis project, run:
 
+```bash
+cookiecutter https://github.com/<your-github-username>/cookiecutter-tax-analysis
+```
 
-[![asciicast](https://asciinema.org/a/244658.svg)](https://asciinema.org/a/244658)
-
-### New version of Cookiecutter Data Science
-------------
-Cookiecutter data science is moving to v2 soon, which will entail using
-the command `ccds ...` rather than `cookiecutter ...`. The cookiecutter command
-will continue to work, and this version of the template will still be available.
-To use the legacy template, you will need to explicitly use `-c v1` to select it.
-Please update any scripts/automation you have to append the `-c v1` option (as above),
-which is available now.
-
-
-### The resulting directory structure
-------------
-
-The directory structure of your new project looks like this: 
+You’ll be prompted for basic project information such as:
 
 ```
-├── LICENSE
-├── Makefile           <- Makefile with commands like `make data` or `make train`
-├── README.md          <- The top-level README for developers using this project.
+project_name [Tax Analysis]:
+repo_name [tax_analysis]:
+author_name [Your Name (optional)]:
+description [A short description of the tax analysis project]:
+```
+
+After generation, navigate into the created directory:
+
+```bash
+cd tax_analysis
+```
+
+---
+
+## Project Structure
+
+The generated project will look like this:
+
+```
 ├── data
-│   ├── external       <- Data from third party sources.
-│   ├── interim        <- Intermediate data that has been transformed.
-│   ├── processed      <- The final, canonical data sets for modeling.
-│   └── raw            <- The original, immutable data dump.
+│   ├── interim
+│   ├── processed
+│   └── raw
 │
-├── docs               <- A default Sphinx project; see sphinx-doc.org for details
+├── notebooks
+│   └── template_report.ipynb
 │
-├── models             <- Trained and serialized models, model predictions, or model summaries
+├── references
+│   └── cited_report.bib
 │
-├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
-│                         the creator's initials, and a short `-` delimited description, e.g.
-│                         `1.0-jqp-initial-data-exploration`.
+├── reports
+│   └── templates
+│       └── cited_report
+│           ├── conf.json
+│           └── index.tex.j2
 │
-├── references         <- Data dictionaries, manuals, and all other explanatory materials.
-│
-├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
-│   └── figures        <- Generated graphics and figures to be used in reporting
-│
-├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
-│                         generated with `pip freeze > requirements.txt`
-│
-├── setup.py           <- makes project pip installable (pip install -e .) so src can be imported
-├── src                <- Source code for use in this project.
-│   ├── __init__.py    <- Makes src a Python module
-│   │
-│   ├── data           <- Scripts to download or generate data
-│   │   └── make_dataset.py
-│   │
-│   ├── features       <- Scripts to turn raw data into features for modeling
-│   │   └── build_features.py
-│   │
-│   ├── models         <- Scripts to train models and then use trained models to make
-│   │   │                 predictions
-│   │   ├── predict_model.py
-│   │   └── train_model.py
-│   │
-│   └── visualization  <- Scripts to create exploratory and results oriented visualizations
-│       └── visualize.py
-│
-└── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
+├── requirements.txt
+├── Makefile
+├── Dockerfile
+├── README.md
+└── src
+    ├── __init__.py
+    ├── jupyter_report.py
+    └── web_images.py
 ```
+
+---
+
+## Development Environment
+
+The generated project includes a `Dockerfile` based on the `jupyter/scipy-notebook` image.  
+You can launch the environment by running:
+
+```bash
+make
+```
+
+or equivalently:
+
+```bash
+make jupyter
+```
+
+This will start a Jupyter Lab session with the mounted project directory.  
+You can view the automatically generated access URL by checking container logs.
+
+---
+
+## Included Makefile Commands
+
+| Command | Description |
+|----------|-------------|
+| `make` / `make all` | Alias for `make jupyter` |
+| `make jupyter` | Launch the Jupyter notebook Docker container |
+| `make address` | Get the container address and port |
+| `make containers` | Start all defined Docker containers |
+| `make stop-containers` | Stop all running containers |
+| `make restart-containers` | Restart containers |
+| `make clear-nb` | Clear Jupyter notebook output |
+| `make clean` | Run all cleaning commands |
+
+---
+
+## Notes
+
+- The default Docker environment already includes `numpy`, `pandas`, `scipy`, `matplotlib`, `scikit-learn`, `seaborn`, and JupyterLab extensions.
+- If your analysis requires machine learning or deep learning, you can install `tensorflow`, `torch`, or `keras` by adding them to `requirements.txt`.
+- To pin versions for reproducibility, regenerate your `requirements.txt` using:
+  ```bash
+  pip freeze > requirements.txt
+  ```
+
+---
 
 ## Contributing
 
-We welcome contributions! [See the docs for guidelines](https://drivendata.github.io/cookiecutter-data-science/#contributing).
+Contributions, bug reports, and feature suggestions are welcome!  
+Feel free to open a pull request or issue on GitHub.
 
-### Installing development requirements
-------------
+---
 
-    pip install -r requirements.txt
+## License
 
-### Running the tests
-------------
+This project is distributed under the MIT License.  
+See the `LICENSE` file for details.
 
-    py.test tests
+---
+
+<p align="center"><small>
+Based on the <a href="https://drivendata.github.io/cookiecutter-data-science/">Cookiecutter Data Science</a> project template.<br>
+#cookiecutterdatascience #taxanalysis
+</small></p>
