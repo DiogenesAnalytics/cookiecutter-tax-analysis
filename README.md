@@ -1,3 +1,6 @@
+[![tests](https://github.com/DiogenesAnalytics/cookiecutter-tax-analysis/actions/workflows/tests.yml/badge.svg)](https://github.com/DiogenesAnalytics/cookiecutter-tax-analysis/actions/workflows/tests.yml)
+[![docker](https://github.com/DiogenesAnalytics/cookiecutter-tax-analysis/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/DiogenesAnalytics/cookiecutter-tax-analysis/actions/workflows/docker-publish.yml)
+
 # Cookiecutter Tax Analysis
 
 _A reproducible and containerized project structure for performing, documenting, and reporting tax calculations with Jupyter notebooks._
