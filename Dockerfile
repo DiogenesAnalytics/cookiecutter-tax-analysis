@@ -7,6 +7,7 @@ ARG DCKRSRC
 RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
     make \
+    tree \
  && rm -rf /var/lib/apt/lists/*
 
 WORKDIR ${DCKRSRC}
