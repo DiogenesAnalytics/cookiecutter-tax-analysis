@@ -9,8 +9,7 @@ _A reproducible and containerized project structure for performing, documenting,
 
 ## Overview
 
-This cookiecutter template provides a standardized yet flexible structure for small- to medium-scale tax analysis projects.  
-It builds on the [Cookiecutter Data Science](https://drivendata.github.io/cookiecutter-data-science/) layout but simplifies it for use in financial, accounting, or tax computation contexts.
+This cookiecutter template provides a standardized yet flexible structure for small- to medium-scale tax analysis projects. It builds on the [Cookiecutter Data Science](https://drivendata.github.io/cookiecutter-data-science/) layout but simplifies it for use in financial, accounting, or tax computation contexts.
 
 The template supports:
 - Reproducible environments via Docker (using the `jupyter/scipy-notebook` base image)
@@ -48,7 +47,7 @@ conda install cookiecutter
 To generate a new tax analysis project, run:
 
 ```bash
-cookiecutter https://github.com/<your-github-username>/cookiecutter-tax-analysis
+cookiecutter https://github.com/DiogenesAnalytics/cookiecutter-tax-analysis
 ```
 
 You’ll be prompted for basic project information such as:
@@ -56,7 +55,6 @@ You’ll be prompted for basic project information such as:
 ```
 project_name [Tax Analysis]:
 repo_name [tax_analysis]:
-author_name [Your Name (optional)]:
 description [A short description of the tax analysis project]:
 ```
 
