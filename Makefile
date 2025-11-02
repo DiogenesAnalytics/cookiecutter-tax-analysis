@@ -32,9 +32,11 @@ GITHUB_USER = $(call get_github_user,$(shell git config --get remote.origin.url)
 
 # Docker-related vars
 DCKRSRC = /usr/local/src/$(REPO_NAME)
-DCKRUSR = --user $(shell id -u):$(shell id -g)
 DCKRTTY := $(if $(filter true,$(NOTTY)),-i,-it)
-TESTVOL = -v ${CURRENTDIR}:${DCKRSRC}
+USE_VOL ?= true
+USE_USR ?= true
+TESTVOL = $(if $(filter true,$(USE_VOL)),-v ${CURRENTDIR}:${DCKRSRC},)
+DCKRUSR = $(if $(filter true,$(USE_USR)),--user $(shell id -u):$(shell id -g),)
 DCKRTST = docker run --rm ${DCKRUSR} ${TESTVOL} ${DCKRTTY}
 DCKRTAG ?= $(GIT_BRANCH)
 DCKR_PULL ?= true
