@@ -18,6 +18,3 @@ RUN if [ -s requirements.txt ]; then \
 # === Fix permissions again ===
 RUN fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
-
-# === Default command to start Jupyter Lab ===
-CMD ["start-notebook.sh"]

@@ -39,25 +39,6 @@ command, simply run `make -n [COMMAND]`.
 + `clear-nb`: simply clears Jupyter notebook output
 + `clean`: combines all clearing commands into one
 
-## Docker
-This is the same Docker command that is defined in the `Makefile` as the
-`jupyter` command. To run it outside of `make`, first navigate to the directory
-by executing `cd {{ cookiecutter.repo_name }}` and run the following:
-```
-docker run -d \
-           --rm \
-           --name {{ cookiecutter.container_name }} \
-           -e PYTHONPATH=/home/jovyan/src \
-           -e JUPYTER_ENABLE_LAB=yes \
-           -p 8888 \
-           -v $PWD:/home/jovyan \
-           {{ cookiecutter.docker_image }} && \
-sleep 5 && \
-  docker logs {{ cookiecutter.container_name }} 2>&1 | \
-    grep "http://127.0.0.1" | tail -n 1 | \
-    sed "s/:8888/:$(docker port {{ cookiecutter.container_name }} | \
-    grep '0.0.0.0:' | awk '{print $3'} | sed 's/0.0.0.0://g')/g"
-```
 Click the link (should look similar to:
 http://127.0.0.1:RANDOM_PORT/lab?token=LONG_ALPHANUMERIC_STRING) which will
 `automatically` log you in and allow you to start running the *notebooks*.

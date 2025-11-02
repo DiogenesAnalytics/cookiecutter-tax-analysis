@@ -1,8 +1,6 @@
 {
     "project_name": "Tax Analysis",
     "repo_name": "{{ cookiecutter.project_name.lower().replace(' ', '_') }}",
-    "author_name": "Your Name (optional)",
     "description": "A short description of the tax analysis project.",
-    "docker_image": "tax_analysis/{{ cookiecutter.repo_name }}",
-    "container_name": "{{ cookiecutter.repo_name }}"
+    "docker_image": "tax_analysis/{{ cookiecutter.repo_name }}"
 }
